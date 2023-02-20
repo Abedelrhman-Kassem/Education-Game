@@ -25,7 +25,7 @@ async function getData() {
       } else popUp();
     } else {
       putData(jsData, current);
-      // document.getElementById("wrong").play();
+      document.getElementById("wrong").play();
     }
   });
 }
