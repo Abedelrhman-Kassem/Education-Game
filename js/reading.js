@@ -3,7 +3,6 @@ let question = document.querySelector(".question");
 let word = document.querySelector(".word");
 let choices = document.querySelector(".choices");
 let button = document.querySelector("button");
-let current = 0;
 let rightAnswers = 0;
 let wrongAnswers = 0;
 
@@ -11,15 +10,16 @@ async function getData(url) {
   try {
     let data = await fetch(url);
     let jsData = await data.json();
+    let current = jsData.splice(Math.floor(Math.random() * jsData.length), 1);
 
-    createElements(jsData, current);
+    createElements(current);
 
     button.addEventListener("click", function () {
-      current < jsData.length && countAnswers(jsData, current);
+      jsData.length > 0 && countAnswers(current);
 
-      current++;
+      current = jsData.splice(Math.floor(Math.random() * jsData.length), 1);
 
-      if (current < jsData.length) createElements(jsData, current);
+      if (jsData.length > 0) createElements(current);
       else resultPopup(rightAnswers, jsData.length);
     });
   } catch (reason) {
@@ -28,42 +28,40 @@ async function getData(url) {
 }
 getData("../json/reading.json").catch((reason) => console.log(Error(reason)));
 
-function createElements(jsData, current) {
-  word.innerHTML = jsData[current].word;
+function createElements(current) {
+  word.innerHTML = current[0].word;
 
   choices.innerHTML = `<div class="choice">
                         <input type="radio" checked name="answer" id="answer_1" /><label
                         for="answer_1"
-                        >${jsData[current].answer_1}</label>
+                        >${current[0].answer_1}</label>
                         </div>
 
                         <div class="choice">
                         <input type="radio" name="answer" id="answer_2" /><label
                         for="answer_2"
-                        >${jsData[current].answer_2}</label>
+                        >${current[0].answer_2}</label>
                         </div>
 
                         <div class="choice">
                         <input type="radio" name="answer" id="answer_3" /><label
                         for="answer_3"
-                        >${jsData[current].answer_3}</label>
+                        >${current[0].answer_3}</label>
                         </div>
 
                         <div class="choice">
                         <input type="radio" name="answer" id="answer_4" /><label
                         for="answer_4"
-                        >${jsData[current].answer_4}</label>
+                        >${current[0].answer_4}</label>
                         </div>`;
 }
 
-function countAnswers(jsData, current) {
+function countAnswers(current) {
   let radiobuttons = document.getElementsByName("answer");
   radiobuttons.forEach((radio) => {
     let label = radio.nextElementSibling;
     if (radio.checked) {
-      label.innerHTML === jsData[current].right_answer
-        ? rightAnswers++
-        : wrongAnswers++;
+      label.innerHTML === current[0].right_answer && rightAnswers++;
     }
   });
 }
