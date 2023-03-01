@@ -116,6 +116,7 @@ section {
   width: fit-content;
   padding: 70px;
   overflow: hidden;
+  margin: auto;
   border-radius: 20px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
