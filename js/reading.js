@@ -4,7 +4,6 @@ let word = document.querySelector(".word");
 let choices = document.querySelector(".choices");
 let button = document.querySelector("button");
 let rightAnswers = 0;
-let wrongAnswers = 0;
 
 async function getData(url) {
   try {
@@ -19,14 +18,16 @@ async function getData(url) {
     createElements(current, answers);
 
     button.addEventListener("click", function () {
-      jsData.length > 0 && countAnswers(current);
-
-      current = jsData.splice(Math.floor(Math.random() * jsData.length), 1);
-      answers = Object.values(current[0]);
-      answers = answers.slice(1, 5);
-
-      if (jsData.length > 0) createElements(current, answers);
-      else resultPopup(rightAnswers, questionsNum);
+      if (jsData.length > 0) {
+        countAnswers(current);
+        current = jsData.splice(Math.floor(Math.random() * jsData.length), 1);
+        answers = Object.values(current[0]);
+        answers = answers.slice(1, 5);
+        createElements(current, answers);
+      } else {
+        countAnswers(current);
+        resultPopup(rightAnswers, questionsNum);
+      }
     });
   } catch (reason) {
     throw error;
@@ -79,7 +80,7 @@ function countAnswers(current) {
   radiobuttons.forEach((radio) => {
     let label = radio.nextElementSibling;
     if (radio.checked) {
-      label.innerHTML === current[0].right_answer && rightAnswers++;
+      label.innerHTML === current[0].right_answer && ++rightAnswers;
     }
   });
 }
