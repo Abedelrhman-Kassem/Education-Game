@@ -10,17 +10,22 @@ async function getData(url) {
   try {
     let data = await fetch(url);
     let jsData = await data.json();
+
     let questionsNum = jsData.length;
     let current = jsData.splice(Math.floor(Math.random() * jsData.length), 1);
+    let answers = Object.values(current[0]);
+    answers = answers.slice(1, 5);
 
-    createElements(current);
+    createElements(current, answers);
 
     button.addEventListener("click", function () {
       jsData.length > 0 && countAnswers(current);
 
       current = jsData.splice(Math.floor(Math.random() * jsData.length), 1);
+      answers = Object.values(current[0]);
+      answers = answers.slice(1, 5);
 
-      if (jsData.length > 0) createElements(current);
+      if (jsData.length > 0) createElements(current, answers);
       else resultPopup(rightAnswers, questionsNum);
     });
   } catch (reason) {
@@ -29,31 +34,43 @@ async function getData(url) {
 }
 getData("../json/reading.json").catch((reason) => console.log(Error(reason)));
 
-function createElements(current) {
+function createElements(current, answers) {
   word.innerHTML = current[0].word;
 
   choices.innerHTML = `<div class="choice">
                         <input type="radio" checked name="answer" id="answer_1" /><label
                         for="answer_1"
-                        >${current[0].answer_1}</label>
+                        >${answers.splice(
+                          [Math.floor(Math.random() * answers.length)],
+                          1
+                        )}</label>
                         </div>
 
                         <div class="choice">
                         <input type="radio" name="answer" id="answer_2" /><label
                         for="answer_2"
-                        >${current[0].answer_2}</label>
+                        >${answers.splice(
+                          [Math.floor(Math.random() * answers.length)],
+                          1
+                        )}</label>
                         </div>
-
+                        
                         <div class="choice">
                         <input type="radio" name="answer" id="answer_3" /><label
                         for="answer_3"
-                        >${current[0].answer_3}</label>
+                        >${answers.splice(
+                          [Math.floor(Math.random() * answers.length)],
+                          1
+                        )}</label>
                         </div>
 
                         <div class="choice">
                         <input type="radio" name="answer" id="answer_4" /><label
                         for="answer_4"
-                        >${current[0].answer_4}</label>
+                        >${answers.splice(
+                          [Math.floor(Math.random() * answers.length)],
+                          1
+                        )}</label>
                         </div>`;
 }
 
