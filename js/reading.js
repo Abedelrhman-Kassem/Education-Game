@@ -10,6 +10,7 @@ async function getData(url) {
   try {
     let data = await fetch(url);
     let jsData = await data.json();
+    let questionsNum = jsData.length;
     let current = jsData.splice(Math.floor(Math.random() * jsData.length), 1);
 
     createElements(current);
@@ -20,7 +21,7 @@ async function getData(url) {
       current = jsData.splice(Math.floor(Math.random() * jsData.length), 1);
 
       if (jsData.length > 0) createElements(current);
-      else resultPopup(rightAnswers, jsData.length);
+      else resultPopup(rightAnswers, questionsNum);
     });
   } catch (reason) {
     throw error;
