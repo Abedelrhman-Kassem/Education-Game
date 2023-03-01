@@ -6,4 +6,4 @@ the Link To Test Yourself
 https://abedelrhman-kassem.github.io/Education-Game/
 
 - Every Quiz has 10 Questions
-- Qustions Are Randomly
+- Qustions and Answers are Randomly
