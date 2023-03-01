@@ -25,7 +25,6 @@ async function getData() {
       } else popUp();
     } else {
       putData(jsData, current);
-      document.getElementById("wrong").play();
     }
   });
 }
@@ -71,7 +70,6 @@ function submit(current, solutionDiv) {
   for (let i = 0; i < solutionDiv.children.length; i++) {
     arr.unshift(solutionDiv.children[i].innerHTML);
   }
-  console.log(arr.join("") === current[0].answer);
 }
 
 function popUp() {
