@@ -6,9 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/normalize.css" />
-    <title>New Learn Game</title>
+    <!-- open sans Font, Cairo Font  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900;1000&family=Open+Sans:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <title>New Learnning Game</title>
   </head>
   <body>
-    <div>Index</div>
+    <section>
+      <div class="overlay"></div>
+      <div class="container">
+        <p
+          class="welcome"
+          data-write="Welcome To Learn And Practise Your Arabic"
+        ></p>
+        <p class="choice" data-write="Choose What You Want"></p>
+        <div class="links">
+          <a
+            id="link-one"
+            data-name="Play Reading Game"
+            data-hover="Start The Game"
+            href="views/reading.html"
+          ></a>
+          <a
+            id="link-two"
+            data-name="Play Writting Game"
+            data-hover="Start The Game"
+            href="views/writing.html"
+          ></a>
+        </div>
+      </div>
+    </section>
+    <script src="js/app.js"></script>
   </body>
 </html>
